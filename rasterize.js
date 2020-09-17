@@ -43,7 +43,7 @@ function getJSONFile(url,descr) {
         console.log(e);
         return(String.null);
     }
-} // end get input spheres
+} // end get input json file
 
 // set up the webGL environment
 function setupWebGL() {
@@ -71,8 +71,8 @@ function setupWebGL() {
 // read triangles in, load them into webgl buffers
 function loadTriangles() {
     var inputTriangles = getJSONFile(INPUT_TRIANGLES_URL,"triangles");
-    
-     if (inputTriangles != String.null) { 
+
+    if (inputTriangles != String.null) { 
         var whichSetVert; // index of vertex in current triangle set
         var whichSetTri; // index of triangle in current triangle set
         var coordArray = []; // 1D array of vertex coords for WebGL
@@ -111,7 +111,7 @@ function loadTriangles() {
         triangleBuffer = gl.createBuffer(); // init empty triangle index buffer
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, triangleBuffer); // activate that buffer
         gl.bufferData(gl.ELEMENT_ARRAY_BUFFER,new Uint16Array(indexArray),gl.STATIC_DRAW); // indices to that buffer
-        
+
     } // end if triangles found
 } // end load triangles
 
@@ -121,14 +121,13 @@ function setupShaders() {
     // define fragment shader in essl using es6 template strings
     var fShaderCode = `
         void main(void) {
-            gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0); // all fragments are white
+            gl_FragColor = vec4(1.0, 0.6, 0.0, 1.0); // all fragments are orange
         }
     `;
     
     // define vertex shader in essl using es6 template strings
     var vShaderCode = `
         attribute vec3 vertexPosition;
-
         void main(void) {
             gl_Position = vec4(vertexPosition, 1.0); // use the untransformed position
         }
@@ -173,6 +172,7 @@ function setupShaders() {
     } // end catch
 } // end setup shaders
 
+// render the loaded model
 function renderTriangles() {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT); // clear frame/depth buffers
     
