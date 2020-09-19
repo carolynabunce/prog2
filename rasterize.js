@@ -123,7 +123,7 @@ function loadTriangles() {
                // colorArray.push(Math.random());
                // colorArray.push(Math.random());
                 //colorArray.push(Math.random());
-                colorArray.push(1.0);
+                colorArray.concat(1.0);
             } // end for vertices in set
             
             // set up the triangle index array, adjusting indices across sets
@@ -187,7 +187,9 @@ function setupShaders() {
 
     // define fragment shader in essl using es6 template strings
     var fShaderCode = `
+        precision mediump int;
         precision mediump float;
+        
         varying vec4 vColor;
         void main(void) {
             gl_FragColor = vColor; // all fragments are picked from json
