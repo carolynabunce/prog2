@@ -54,7 +54,7 @@ function setupWebGL() {
 
     // Get the canvas and context
     var canvas = document.getElementById("myWebGLCanvas"); // create a js canvas
-    gl = canvas.getContext("webgl"); // get a webgl object from it
+    gl = canvas.getContext("webgl", { alpha: false }); // get a webgl object from it
     
     try {
       if (gl == null) {
@@ -90,13 +90,14 @@ function loadTriangles() {
         //var whichSetColor;
         //var colBufferSize = 0;
         var colorArray = [];
-        /*var testColor = [0.6,0.4,0.4,1.0, 0.6,0.4,0.4,1.0, 0.6,0.4,0.4,1.0,
+        var testColor = [0.6,0.4,0.4,1.0, 0.6,0.4,0.4,1.0, 0.6,0.4,0.4,1.0,
             0.6,0.4,0.4,1.0, 0.6,0.4,0.4,1.0, 0.6,0.4,0.4,1.0,
             0.6,0.4,0.4,1.0, 0.6,0.4,0.4,1.0, 0.6,0.4,0.4,1.0,
             0.6,0.6,0.4,1.0, 0.6,0.6,0.4,1.0, 0.6,0.6,0.4,1.0,
             0.6,0.6,0.4,1.0, 0.6,0.6,0.4,1.0, 0.6,0.6,0.4,1.0,
             0.6,0.6,0.4,1.0, 0.6,0.6,0.4,1.0, 0.6,0.6,0.4,1.0,
-            0.6,0.6,0.4,1.0, 0.6,0.6,0.4,1.0, 0.6,0.6,0.4,1.0];*/
+            0.6,0.6,0.4,1.0, 0.6,0.6,0.4,1.0, 0.6,0.6,0.4,1.0];
+        var test2 = [1.0, 0.6, 0.0, 1.0];
 
         for (var whichSet=0; whichSet<inputTriangles.length; whichSet++) {
 
@@ -259,6 +260,9 @@ function renderTriangles() {
     }*/
 
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT); // clear frame/depth buffers
+
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
     
     // vertex buffer: activate and feed into vertex shader
     gl.bindBuffer(gl.ARRAY_BUFFER,vertexBuffer); // activate
