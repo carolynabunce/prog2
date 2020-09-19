@@ -54,7 +54,7 @@ function setupWebGL() {
 
     // Get the canvas and context
     var canvas = document.getElementById("myWebGLCanvas"); // create a js canvas
-    gl = canvas.getContext("webgl", { alpha: false }); // get a webgl object from it
+    gl = canvas.getContext("webgl"); // get a webgl object from it
     
     try {
       if (gl == null) {
