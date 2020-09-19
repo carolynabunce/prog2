@@ -61,6 +61,10 @@ function setupWebGL() {
         throw "unable to create gl context -- is your browser gl ready?";
       } else {
         gl.clearColor(0.0, 0.0, 0.0, 1.0); // use black when we clear the frame buffer
+
+        //gl.enable(gl.BLEND);
+        //gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
         gl.clearDepth(1.0); // use max when we clear the depth buffer
         gl.enable(gl.DEPTH_TEST); // use hidden surface removal (with zbuffering)
       }
@@ -97,6 +101,7 @@ function loadTriangles() {
             0.6,0.6,0.4,1.0, 0.6,0.6,0.4,1.0, 0.6,0.6,0.4,1.0,
             0.6,0.6,0.4,1.0, 0.6,0.6,0.4,1.0, 0.6,0.6,0.4,1.0,
             0.6,0.6,0.4,1.0, 0.6,0.6,0.4,1.0, 0.6,0.6,0.4,1.0];
+            
         var test2 = [1.0, 0.6, 0.0, 1.0];
 
         for (var whichSet=0; whichSet<inputTriangles.length; whichSet++) {
@@ -146,6 +151,8 @@ function loadTriangles() {
         //for (var e = 0; e < colorArray.length; e++){
             //console.log(colorArray[e]);
         //}
+
+        //colorArray[0] = 1.0;
 
         
         // send the vertex coords to webGL
